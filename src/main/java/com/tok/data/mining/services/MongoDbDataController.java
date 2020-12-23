@@ -17,6 +17,7 @@ public class MongoDbDataController {
 	
 	@GetMapping("/databases")
 	public List<String> all(){
+		//Test
 		return List.copyOf(central.getDatabasesNames());
 	}
 	
