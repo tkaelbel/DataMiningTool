@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "com.tok.data.mining.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'com.tok.data.mining.jwtSecret'"
+  },
+  {
+    "name": "com.tok.data.mining.jwtExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'com.tok.data.mining.jwtExpirationMs'"
+  }
+]}

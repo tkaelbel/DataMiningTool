@@ -12,7 +12,7 @@ import com.mongodb.client.MongoClients;
 public class MongoDbConfig {
 		
     @Bean
-    public MongoClient mongo() {
+    public MongoClient generalMongoClient() {
         ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017");
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
           .applyConnectionString(connectionString)
@@ -20,5 +20,6 @@ public class MongoDbConfig {
         
         return MongoClients.create(mongoClientSettings);
     }
-	
+    
+    	
 }
