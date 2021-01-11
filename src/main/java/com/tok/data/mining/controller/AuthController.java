@@ -83,7 +83,7 @@ public class AuthController {
 		Set<DataMiningRole> roles = new HashSet<>();
 
 		if (strRoles == null) {
-			DataMiningRole userRole = dataMiningRoleRepository.findByRoleName("USER")
+			DataMiningRole userRole = dataMiningRoleRepository.findByRoleName("ROLE_USER")
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 			roles.add(userRole);
 		} else {
