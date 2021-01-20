@@ -2,10 +2,8 @@ package com.tok.data.mining.mongodb;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.bson.Document;
@@ -22,7 +20,6 @@ import com.tok.data.mining.payload.response.DatabaseDataResponse;
 import com.tok.data.mining.payload.response.KeyValue;
 
 import io.jsonwebtoken.lang.Assert;
-import lombok.val;
 
 @Component
 public class MongoDbCentral {

@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tok.data.mining.algorithms.AlgorithmManager;
 import com.tok.data.mining.mongodb.MongoDbCentral;
 import com.tok.data.mining.payload.request.CollectionDataRequest;
+import com.tok.data.mining.payload.response.AlgorithmNamesResponse;
 import com.tok.data.mining.payload.response.CollectionDataResponse;
 import com.tok.data.mining.payload.response.DatabaseDataResponse;
 
@@ -21,6 +23,10 @@ public class DataController {
 
 	@Autowired
 	private MongoDbCentral central;
+	
+	@Autowired
+	private AlgorithmManager algorithmManager;
+	
 
 	@GetMapping("/databases")
 //	@PreAuthorize("hasRole('USER')")
@@ -31,5 +37,10 @@ public class DataController {
 	@GetMapping("/collectionData")
 	public ResponseEntity<CollectionDataResponse> collectionData(CollectionDataRequest request) {
 		return ResponseEntity.ok(central.getCollectionData(request.getDatabaseName(), request.getCollectionName()));
+	}
+	
+	@GetMapping("/algorithmNames")
+	public ResponseEntity<AlgorithmNamesResponse> algorithmNames() {
+		return ResponseEntity.ok(new AlgorithmNamesResponse(algorithmManager.getRegisteredAlgorithms()));
 	}
 }
