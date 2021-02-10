@@ -6,20 +6,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.bson.BsonDocument;
 import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.tok.data.mining.mongodb.model.CollectionColumnDataModel;
 import com.tok.data.mining.payload.response.CollectionDataResponse;
 import com.tok.data.mining.payload.response.DatabaseDataResponse;
 import com.tok.data.mining.payload.response.KeyValue;
-
-import io.jsonwebtoken.lang.Assert;
 
 @Component
 public class MongoDbCentral {
@@ -52,8 +55,8 @@ public class MongoDbCentral {
 	}
 
 	public CollectionDataResponse getCollectionData(String databaseName, String collectionName) {
-		Assert.notNull(databaseName);
-		Assert.notNull(collectionName);
+		Assert.notNull(databaseName, "databaseName cannot be null");
+		Assert.notNull(collectionName, " collecitonName cannot be null");
 
 		List<List<KeyValue>> values = new ArrayList<>();
 		Set<String> columns = new HashSet<>();
@@ -77,13 +80,29 @@ public class MongoDbCentral {
 		return response;
 	}
 
-	public Set<String> getCollectionNames() {
-
-		return null;
+	
+	public CollectionColumnDataModel getColumnCollectionData(String databaseName, String collectionName, String column) {
+		Assert.notNull(databaseName, "databaseName cannot be null");
+		Assert.notNull(collectionName, "collecitonName cannot be null");
+		Assert.notNull(column, "column cannot be null");
+		
+		MongoDatabase database = client.getDatabase(databaseName);
+		MongoCollection<Document> collection = database.getCollection(collectionName);
+		
+		List<Object> values = new ArrayList<>();
+		CollectionColumnDataModel model = new CollectionColumnDataModel(column, values);
+				
+		FindIterable<Document> data = collection.find();
+		
+		data.forEach(t -> {
+			t.entrySet().forEach(entry -> {
+				if(entry.getKey().equals(column)) {
+					values.add(entry.getValue());
+				}
+				
+			});
+		});
+		
+		return model;
 	}
-
-	public void createCollection(String name) {
-
-	}
-
 }
