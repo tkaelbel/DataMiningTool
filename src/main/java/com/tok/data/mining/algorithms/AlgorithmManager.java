@@ -1,7 +1,6 @@
 package com.tok.data.mining.algorithms;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,9 @@ public class AlgorithmManager {
 		Assert.notNull(request.getCollectionName(), "collectionName is null");
 		
 		IAlgorithm algorithm = algorithmFactory.getAlgorithm(request.getEnumName());
-		if(algorithm != null) algorithm.execute(request);
+		if(algorithm != null) {
+			return new AlgorithmResponse(algorithm.execute(request).getOutput());
+		}
 		
 		
 		return null;

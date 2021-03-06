@@ -5,7 +5,7 @@ import com.tok.data.mining.payload.request.AlgorithmRequest;
 
 public interface IAlgorithm {
 	
-	public IAlgorithmReturnModel execute(AlgorithmRequest data);
+	public AlgorithmReturnModel execute(AlgorithmRequest data);
 
 	public AlgorithmName getName();
 	

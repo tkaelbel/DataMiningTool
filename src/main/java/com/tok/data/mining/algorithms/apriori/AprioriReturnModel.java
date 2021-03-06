@@ -1,8 +1,8 @@
 package com.tok.data.mining.algorithms.apriori;
 
-import com.tok.data.mining.algorithms.IAlgorithmReturnModel;
+import com.tok.data.mining.algorithms.AlgorithmReturnModel;
 
-public class AprioriReturnModel implements IAlgorithmReturnModel {
+public class AprioriReturnModel extends AlgorithmReturnModel {
 
 	
 }
